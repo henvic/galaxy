@@ -23,7 +23,7 @@ docker build -t galaxy:latest
 docker run -p 9000:9000 galaxy
 ```
 
-A image is not currently available at the Docker Hub registry.
+An image is not currently available at the Docker Hub registry.
 
 ### Ports and configuration
 The application runs at port 9000 and also exposes the Go profiler and debugger at local port 8081.
