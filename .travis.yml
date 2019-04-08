@@ -1,0 +1,28 @@
+sudo: false
+
+language: go
+
+go:
+  - "1.12.2"
+  - "tip"
+
+matrix:
+  allow_failures:
+    - go: tip
+
+env:
+  - GO111MODULE=on
+
+install:
+  - go get github.com/mattn/goveralls
+  - go get github.com/kisielk/errcheck
+  - go get golang.org/x/lint/golint
+  - go get honnef.co/go/tools/cmd/staticcheck
+  - go get github.com/securego/gosec/cmd/gosec
+  - go get -u golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
+
+script:
+  - make test
+
+after_success:
+  - sh $(pwd)/scripts/coverage.sh --coveralls
