@@ -47,6 +47,10 @@ func (s *Server) Serve(ctx context.Context, params Params) error {
 	router.HandleFunc("/v1/sectors/{sector_id}/dns", dnsHandler)
 	maybeSwagger(router, params)
 
+	if swagon {
+		log.Infof("warning: swagger available at %s/swagger/index.html", getAddr(params.Address))
+	}
+
 	s.http = &http.Server{
 		Handler: router,
 	}
