@@ -54,7 +54,10 @@ paths:
       produces:
       - text/plain
       responses:
-        "200": {}
+        "200":
+          description: Documentation message
+          schema:
+            type: string
       summary: Home
       tags:
       - galaxy

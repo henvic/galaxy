@@ -115,7 +115,7 @@ func (s *Server) listen() {
 // @Tags galaxy
 // @ID home-galaxy
 // @Produce plain
-// @Success 200
+// @Success 200 {string} string	"Documentation message"
 // @Router / [get]
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	_, _ = fmt.Fprintln(w, "galaxy is running. Docs in https://github.com/henvic/galaxy")

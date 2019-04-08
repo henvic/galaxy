@@ -30,7 +30,12 @@
                 "summary": "Home",
                 "operationId": "home-galaxy",
                 "responses": {
-                    "200": {}
+                    "200": {
+                        "description": "Documentation message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
