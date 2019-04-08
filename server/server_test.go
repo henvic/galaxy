@@ -37,7 +37,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestDNSBadBody(t *testing.T) {
-	path := fmt.Sprintf("http://%s/sectors/1/dns", params.Address)
+	path := fmt.Sprintf("http://%s/v1/sectors/1/dns", params.Address)
 	body := ioutil.NopCloser(bytes.NewReader([]byte("x")))
 
 	resp, err := http.Post(path, "application/json", body)
@@ -58,7 +58,7 @@ func TestDNSBadBody(t *testing.T) {
 }
 
 func TestDNSMethodNotAllowed(t *testing.T) {
-	path := fmt.Sprintf("http://%s/sectors/1/dns", params.Address)
+	path := fmt.Sprintf("http://%s/v1/sectors/1/dns", params.Address)
 
 	resp, err := http.Get(path)
 
@@ -72,7 +72,7 @@ func TestDNSMethodNotAllowed(t *testing.T) {
 }
 
 func TestDNSBadContentType(t *testing.T) {
-	path := fmt.Sprintf("http://%s/sectors/1/dns", params.Address)
+	path := fmt.Sprintf("http://%s/v1/sectors/1/dns", params.Address)
 	body := ioutil.NopCloser(bytes.NewReader([]byte("x")))
 
 	resp, err := http.Post(path, "application/unacceptable", body)
@@ -87,7 +87,7 @@ func TestDNSBadContentType(t *testing.T) {
 }
 
 func TestDNSNonNumericSectionID(t *testing.T) {
-	path := fmt.Sprintf("http://%s/sectors/3x/dns", params.Address)
+	path := fmt.Sprintf("http://%s/v1/sectors/3x/dns", params.Address)
 	body := ioutil.NopCloser(bytes.NewReader([]byte(
 		`{"x": "33", "y": "42", "z": "13", "vel": "4.229"}`,
 	)))
@@ -149,7 +149,7 @@ var invalidCases = []struct {
 func TestDNSInvalidCoordinates(t *testing.T) {
 	for _, tt := range invalidCases {
 		t.Run(tt.name, func(t *testing.T) {
-			path := fmt.Sprintf("http://%s/sectors/17/dns", params.Address)
+			path := fmt.Sprintf("http://%s/v1/sectors/17/dns", params.Address)
 			body := ioutil.NopCloser(bytes.NewReader([]byte(tt.request)))
 
 			resp, err := http.Post(path, "application/json", body)
@@ -184,7 +184,7 @@ func TestDNSInvalidCoordinates(t *testing.T) {
 }
 
 func TestDNS(t *testing.T) {
-	path := fmt.Sprintf("http://%s/sectors/50/dns", params.Address)
+	path := fmt.Sprintf("http://%s/v1/sectors/50/dns", params.Address)
 	body := ioutil.NopCloser(bytes.NewReader([]byte(
 		`{"x": "33", "y": "42", "z": "13", "vel": "4.229"}`,
 	)))

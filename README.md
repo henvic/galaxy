@@ -7,7 +7,7 @@ galaxy offers a drone navigation service (DNS).
 Querying a DNS location on sectorID 311:
 
 ```bash
-curl -XPOST http://localhost:9000/sectors/311/dns -H "Content-Type: application/json" -d '{"x": "33", "y": "42", "z": "13", "vel": "4.229"}'
+curl -XPOST http://localhost:9000/v1/sectors/311/dns -H "Content-Type: application/json" -d '{"x": "33", "y": "42", "z": "13", "vel": "4.229"}'
 ```
 
 ## Commands

@@ -44,7 +44,7 @@ func (s *Server) Serve(ctx context.Context, params Params) error {
 
 	var router = mux.NewRouter()
 	router.HandleFunc("/", homeHandler)
-	router.HandleFunc("/sectors/{sectorID}/dns", dnsHandler)
+	router.HandleFunc("/v1/sectors/{sector_id}/dns", dnsHandler)
 
 	s.http = &http.Server{
 		Handler: router,

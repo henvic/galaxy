@@ -14,7 +14,7 @@ import (
 
 func dnsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	sid, ok := getSectorID(vars["sectorID"])
+	sid, ok := getSectorID(vars["sector_id"])
 
 	if !ok {
 		ErrorHandler(w, r, http.StatusBadRequest, "Sector value must be numeric")
