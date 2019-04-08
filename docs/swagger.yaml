@@ -1,3 +1,4 @@
+basePath: /v1
 definitions:
   server.DNSRequest:
     properties:
@@ -32,9 +33,19 @@ definitions:
         example: 404
         type: integer
     type: object
+host: localhost:9000
 info:
-  contact: {}
-  license: {}
+  contact:
+    email: support@example.com
+    name: API Support
+    url: http://example.com/support
+  description: galaxy offers a drone navigation service (DNS).
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://example.com/terms/
+  title: galaxy API
+  version: "1.0"
 paths:
   /:
     get:
@@ -92,3 +103,4 @@ paths:
       summary: Show a DNS location
       tags:
       - galaxy
+swagger: "2.0"

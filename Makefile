@@ -3,7 +3,7 @@
 server:
 	go run ./cmd/server
 write-apidocs:
-	swag init --generalInfo cmd/docs/docs.go
+	swag init --generalInfo cmd/server/main.go
 apidocs:
 	go run -tags=swagon ./cmd/server
 test:
