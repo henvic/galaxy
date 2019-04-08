@@ -1,4 +1,19 @@
 definitions:
+  server.DNSRequest:
+    properties:
+      vel:
+        example: "48.1"
+        type: string
+      x:
+        example: "32.1"
+        type: string
+      "y":
+        example: "4.2"
+        type: string
+      z:
+        example: "31.3"
+        type: string
+    type: object
   server.DNSResponse:
     properties:
       loc:
@@ -32,7 +47,7 @@ paths:
       summary: Home
       tags:
       - galaxy
-  /sectors/{sector_id}/dns:
+  /v1/sectors/{sector_id}/dns:
     post:
       consumes:
       - application/json
@@ -44,6 +59,13 @@ paths:
         name: sector_id
         required: true
         type: integer
+      - description: x, y, z are the coordinates and vel is the velocity
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/server.DNSRequest'
+          type: object
       produces:
       - application/json
       responses:

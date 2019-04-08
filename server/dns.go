@@ -19,11 +19,12 @@ import (
 // @Accept json
 // @Produce json
 // @Param sector_id path int true "Sector ID"
+// @Param req body server.DNSRequest true "x, y, z are the coordinates and vel is the velocity"
 // @Success 200 {object} server.DNSResponse
 // @Failure 400 {object} server.ErrorResponse
 // @Failure 405 {object} server.ErrorResponse
 // @Failure 406 {object} server.ErrorResponse
-// @Router /sectors/{sector_id}/dns [post]
+// @Router /v1/sectors/{sector_id}/dns [post]
 func dnsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	sid, ok := getSectorID(vars["sector_id"])
@@ -43,7 +44,7 @@ func dnsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	d := dnsRequest{}
+	d := DNSRequest{}
 
 	if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
 		ErrorHandler(w, r, http.StatusBadRequest, "cannot decode request body as JSON")
@@ -76,14 +77,15 @@ func dnsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-type dnsRequest struct {
-	X   json.Number `json:"x"`
-	Y   json.Number `json:"y"`
-	Z   json.Number `json:"z"`
-	Vel json.Number `json:"vel"`
+// DNSRequest of a galaxy sector location.
+type DNSRequest struct {
+	X   json.Number `json:"x" example:"32.1"`
+	Y   json.Number `json:"y" example:"4.2"`
+	Z   json.Number `json:"z" example:"31.3"`
+	Vel json.Number `json:"vel" example:"48.1"`
 }
 
-func (d *dnsRequest) geolocation() (dns galaxy.DNS, err error) {
+func (d *DNSRequest) geolocation() (dns galaxy.DNS, err error) {
 	var failed = []string{}
 
 	if dns.X, err = d.X.Float64(); err != nil {

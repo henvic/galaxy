@@ -20,7 +20,7 @@
                 }
             }
         },
-        "/sectors/{sector_id}/dns": {
+        "/v1/sectors/{sector_id}/dns": {
             "post": {
                 "description": "Get a DNS location of a sector of the galaxy",
                 "consumes": [
@@ -41,6 +41,16 @@
                         "name": "sector_id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "x, y, z are the coordinates and vel is the velocity",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/server.DNSRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -77,6 +87,27 @@
         }
     },
     "definitions": {
+        "server.DNSRequest": {
+            "type": "object",
+            "properties": {
+                "vel": {
+                    "type": "string",
+                    "example": "48.1"
+                },
+                "x": {
+                    "type": "string",
+                    "example": "32.1"
+                },
+                "y": {
+                    "type": "string",
+                    "example": "4.2"
+                },
+                "z": {
+                    "type": "string",
+                    "example": "31.3"
+                }
+            }
+        },
         "server.DNSResponse": {
             "type": "object",
             "properties": {
