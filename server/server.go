@@ -45,6 +45,7 @@ func (s *Server) Serve(ctx context.Context, params Params) error {
 	var router = mux.NewRouter()
 	router.HandleFunc("/", homeHandler)
 	router.HandleFunc("/v1/sectors/{sector_id}/dns", dnsHandler)
+	maybeSwagger(router, params)
 
 	s.http = &http.Server{
 		Handler: router,
@@ -105,6 +106,13 @@ func (s *Server) listen() {
 	s.ec <- err
 }
 
+// @Summary Home
+// @Description Healthcheck endpoint
+// @Tags galaxy
+// @ID home-galaxy
+// @Produce plain
+// @Success 200
+// @Router / [get]
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	_, _ = fmt.Fprintln(w, "galaxy is running. Docs in https://github.com/henvic/galaxy")
 }

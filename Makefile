@@ -1,6 +1,10 @@
-.SILENT: server test
-.PHONY: server test
+.SILENT: server apidocs write-apidocs test
+.PHONY: server apidocs write-apidocs test
 server:
 	go run ./cmd/server
+write-apidocs:
+	swag init --generalInfo cmd/docs/docs.go
+apidocs:
+	go run -tags=swagon ./cmd/server
 test:
 	./scripts/test.sh

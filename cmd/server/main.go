@@ -15,6 +15,21 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// @title galaxy API
+// @version 1.0
+// @description galaxy offers a drone navigation service (DNS).
+// @termsOfService http://example.com/terms/
+
+// @contact.name API Support
+// @contact.url http://example.com/support
+// @contact.email support@example.com
+
+// @license.name MIT
+// @license.url https://opensource.org/licenses/MIT
+
+// @host localhost:9000
+// @BasePath /v1
+
 var params = server.Params{}
 
 func main() {

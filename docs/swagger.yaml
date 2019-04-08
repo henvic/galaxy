@@ -1,0 +1,72 @@
+definitions:
+  server.DNSResponse:
+    properties:
+      loc:
+        example: 27372.229
+        type: number
+    type: object
+  server.ErrorResponse:
+    properties:
+      errors:
+        example: reference not found
+        type: string
+      message:
+        example: Not Found
+        type: string
+      status:
+        example: 404
+        type: integer
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /:
+    get:
+      description: Healthcheck endpoint
+      operationId: home-galaxy
+      produces:
+      - text/plain
+      responses:
+        "200": {}
+      summary: Home
+      tags:
+      - galaxy
+  /sectors/{sector_id}/dns:
+    post:
+      consumes:
+      - application/json
+      description: Get a DNS location of a sector of the galaxy
+      operationId: dns-sector-galaxy
+      parameters:
+      - description: Sector ID
+        in: path
+        name: sector_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/server.DNSResponse'
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/server.ErrorResponse'
+            type: object
+        "405":
+          description: Method Not Allowed
+          schema:
+            $ref: '#/definitions/server.ErrorResponse'
+            type: object
+        "406":
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/server.ErrorResponse'
+            type: object
+      summary: Show a DNS location
+      tags:
+      - galaxy

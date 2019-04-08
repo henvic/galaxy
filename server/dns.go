@@ -12,6 +12,18 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// @Summary Show a DNS location
+// @Description Get a DNS location of a sector of the galaxy
+// @Tags galaxy
+// @ID dns-sector-galaxy
+// @Accept json
+// @Produce json
+// @Param sector_id path int true "Sector ID"
+// @Success 200 {object} server.DNSResponse
+// @Failure 400 {object} server.ErrorResponse
+// @Failure 405 {object} server.ErrorResponse
+// @Failure 406 {object} server.ErrorResponse
+// @Router /sectors/{sector_id}/dns [post]
 func dnsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	sid, ok := getSectorID(vars["sector_id"])
@@ -47,7 +59,7 @@ func dnsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := dnsResponse{
+	resp := DNSResponse{
 		Loc: dns.Loc(sid),
 	}
 
@@ -97,8 +109,9 @@ func (d *dnsRequest) geolocation() (dns galaxy.DNS, err error) {
 	return dns, nil
 }
 
-type dnsResponse struct {
-	Loc float64 `json:"loc"`
+// DNSResponse with a galaxy sector location.
+type DNSResponse struct {
+	Loc float64 `json:"loc" example:"27372.229"`
 }
 
 func getSectorID(s string) (int, bool) {

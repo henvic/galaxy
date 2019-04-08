@@ -11,7 +11,7 @@ curl -XPOST http://localhost:9000/v1/sectors/311/dns -H "Content-Type: applicati
 ```
 
 ## Commands
-Use `make server` to run the application.
+Use `make server` to run the application or `make apidocs` to run the application with [Swagger](https://swagger.io) API documentation server turned on.
 
 ### Docker
 A Dockerfile is available in this directory as well.
@@ -40,6 +40,9 @@ The following commands are available and require no arguments:
 * **make test**: run tests
 
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Integration tests should be written as well.
+
+On API changes, update the Swagger documentation accordingly using [swag](https://github.com/swaggo/swag).
+Use `make write-apidocs` to recreate the API documentation.
 
 ## Committing and pushing changes
 The master branch of this repository on GitHub is protected:

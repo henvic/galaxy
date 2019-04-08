@@ -1,0 +1,107 @@
+{
+    "info": {
+        "contact": {},
+        "license": {}
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Healthcheck endpoint",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "galaxy"
+                ],
+                "summary": "Home",
+                "operationId": "home-galaxy",
+                "responses": {
+                    "200": {}
+                }
+            }
+        },
+        "/sectors/{sector_id}/dns": {
+            "post": {
+                "description": "Get a DNS location of a sector of the galaxy",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "galaxy"
+                ],
+                "summary": "Show a DNS location",
+                "operationId": "dns-sector-galaxy",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Sector ID",
+                        "name": "sector_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/server.DNSResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/server.ErrorResponse"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/server.ErrorResponse"
+                        }
+                    },
+                    "406": {
+                        "description": "Not Acceptable",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/server.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "server.DNSResponse": {
+            "type": "object",
+            "properties": {
+                "loc": {
+                    "type": "number",
+                    "example": 27372.229
+                }
+            }
+        },
+        "server.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errors": {
+                    "type": "string",
+                    "example": "reference not found"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Not Found"
+                },
+                "status": {
+                    "type": "integer",
+                    "example": 404
+                }
+            }
+        }
+    }
+}

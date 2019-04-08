@@ -8,10 +8,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type response struct {
-	Status  int    `json:"status"`
-	Message string `json:"message"`
-	Errors  string `json:"errors,omitempty"`
+// ErrorResponse from the API.
+type ErrorResponse struct {
+	Status  int    `json:"status" example:"404"`
+	Message string `json:"message" example:"Not Found"`
+	Errors  string `json:"errors,omitempty" example:"reference not found"`
 }
 
 // ErrorHandler for errors.
@@ -30,7 +31,7 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request, code int, errors ...st
 
 	e.SetIndent("", "    ")
 
-	if err := e.Encode(response{
+	if err := e.Encode(ErrorResponse{
 		Status:  code,
 		Message: http.StatusText(code),
 		Errors:  strings.Join(errors, "\n"),
