@@ -39,7 +39,7 @@
                 }
             }
         },
-        "/v1/sectors/{sector_id}/dns": {
+        "/sectors/{sector_id}/dns": {
             "post": {
                 "description": "Get a DNS location of a sector of the galaxy",
                 "consumes": [

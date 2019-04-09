@@ -24,7 +24,7 @@ import (
 // @Failure 400 {object} server.ErrorResponse
 // @Failure 405 {object} server.ErrorResponse
 // @Failure 406 {object} server.ErrorResponse
-// @Router /v1/sectors/{sector_id}/dns [post]
+// @Router /sectors/{sector_id}/dns [post]
 func dnsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	sid, ok := getSectorID(vars["sector_id"])
